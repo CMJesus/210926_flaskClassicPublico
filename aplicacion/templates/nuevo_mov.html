@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block titulo_pagina %} Nuevo movimiento {% endblock %}
+
+{% block contenido_pagina %}
+            <h1>Alta de Movimiento</h1>
+            <!--CLASE ERROR-->
+            {% for error in errores %}
+            <p class="error">{{ error}}</p>
+            {% endfor %}
+
+            <!--FORMULARIO-->
+            <form action="/nuevo_mov.html" method="post">
+                <div class="campo-formulario">
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" name="fecha" id="fecha" value={{form.fecha}}>
+                    
+                </div>
+                <div class="campo-formulario">
+                    <label for="concepto">Concepto:</label>
+                    <input type="concepto" name="concepto" id="concepto" value={{form.concepto}}>
+                </div>
+                <div class="campo-formulario">
+                    <input type="radio" name="ingreso_gasto" id="ingreso" value="I"><span class="label">Ingreso</span>
+                    <input type="radio" name="ingreso_gasto" id="gasto" value="G"><span class="label">Gasto</span>     
+                </div>
+                <div class="campo-formulario">
+                    <label for="cantidad">Cantidad:</label>
+                    <input type="text" name="cantidad" id="cantidad" value={{form.cantidad}}>
+                </div>       
+                <input name="submit" class="blue-button" type="submit" value="Enviar">
+                
+            </form>
+
+{% endblock %}

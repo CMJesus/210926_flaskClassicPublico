@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block titulo_pagina %} Lista de Movimientos {% endblock %}
+
+{% block contenido_pagina %}
+        <h1>Lista de Movimientos</h1>
+        {% if items | length == 0 %}
+            <p>Introduce el primer movimiento</p>
+        {% else %}
+            <table class="paper">
+                <tr>
+                    <th>Fecha</th>
+                    <th>Concepto</th>
+                    <th>Ingreso / Gasto</th>
+                    <th>Cantidad</th>
+                </tr>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.fecha }}</td>
+                    <td>{{ item.concepto }}</td>
+                    <td>{% if item.ingreso_gasto == 'I' %} Ingreso 
+                        {% else %} Gasto 
+                        {% endif %}</td>
+                    <td>{{ item.cantidad }}€</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+{% endblock %}
+

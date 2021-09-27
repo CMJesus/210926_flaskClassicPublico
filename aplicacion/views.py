@@ -13,7 +13,7 @@ def inicio():
     consulta = """
         SELECT * 
             FROM movimientos 
-            ORDER BY fecha;"
+            ORDER BY fecha;
     """
     movimientos = dbManager.consultaSQL(consulta)
     

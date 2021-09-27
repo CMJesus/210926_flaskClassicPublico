@@ -1,5 +1,6 @@
 import sqlite3
 
+
 class DBManager():
     def __init__(self, ruta_basedatos):
         self.ruta_basedatos = ruta_basedatos
@@ -25,3 +26,13 @@ class DBManager():
 
         conex.close()
         return registros
+
+    def insertaSQL(self, consulta, params):
+        conex = sqlite3.connect(self.ruta_basedatos)
+
+        cur = conex.cursor()
+        claves = params.keys()
+
+        cur.execute(consulta, params)
+        conex.commit()
+        conex.close()

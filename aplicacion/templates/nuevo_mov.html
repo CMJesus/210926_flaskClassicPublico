@@ -10,25 +10,35 @@
             {% endfor %}
 
             <!--FORMULARIO-->
-            <form action="/nuevo_mov.html" method="post">
+            <form action="/nuevo" method="post">
+                {{ form.hidden_tag() }}
+
                 <div class="campo-formulario">
-                    <label for="fecha">Fecha:</label>
-                    <input type="date" name="fecha" id="fecha" value={{form.fecha}}>
-                    
+                    {{ form.fecha.label() }}
+                    {{ form.fecha(type="date") }}
                 </div>
+                
                 <div class="campo-formulario">
-                    <label for="concepto">Concepto:</label>
-                    <input type="concepto" name="concepto" id="concepto" value={{form.concepto}}>
+                    {{ form.concepto.label() }}
+                    {{ form.concepto(placeholder="Escriba concepto") }}
+
+                    {% for error in form.concepto.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
                 </div>
+                
                 <div class="campo-formulario">
-                    <input type="radio" name="ingreso_gasto" id="ingreso" value="I"><span class="label">Ingreso</span>
-                    <input type="radio" name="ingreso_gasto" id="gasto" value="G"><span class="label">Gasto</span>     
+                    {% for subfield in form.ingreso_gasto %}
+                        {{ subfield }} {{ subfield.label }}
+                    {% endfor %}
                 </div>
+
                 <div class="campo-formulario">
-                    <label for="cantidad">Cantidad:</label>
-                    <input type="text" name="cantidad" id="cantidad" value={{form.cantidad}}>
+                    {{ form.cantidad.label() }}
+                    {{ form.cantidad() }}
                 </div>       
-                <input name="submit" class="blue-button" type="submit" value="Enviar">
+                
+                {{ form.submit() }}
                 
             </form>
 

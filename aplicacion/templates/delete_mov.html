@@ -3,38 +3,39 @@
 {% block titulo_pagina %} Nuevo movimiento {% endblock %}
 
 {% block contenido_pagina %}
-            <h1>Alta de Movimiento</h1>
+            <h1>Borrado de movimientos</h1>
             <!--CLASE ERROR-->
             {% for error in errores %}
             <p class="error">{{ error}}</p>
             {% endfor %}
 
             <!--FORMULARIO-->
-            <form action="/nuevo" method="post">
+            <form action="/borrar/{{ form.id.data }}" method="post">
                 {{ form.hidden_tag() }}
 
                 <div class="campo-formulario">
                     {{ form.fecha.label() }}
-                    {{ form.fecha.data }}
+                    {{ form.fecha(type="date") }}
                 </div>
                 
                 <div class="campo-formulario">
                     {{ form.concepto.label() }}
-                    {{ form.concepto.data }}
+                    {{ form.concepto(placeholder="Escriba concepto") }}
+
+                    {% for error in form.concepto.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
                 </div>
                 
                 <div class="campo-formulario">
-                    <label>Ingreso o Gasto</label>
-                    {% if form.ingreso_gasto.data == 'I' %} 
-                        Ingreso 
-                    {% else %} 
-                        Gasto 
-                    {% endif %}
+                    {% for subfield in form.ingreso_gasto %}
+                        {{ subfield }} {{ subfield.label }}
+                    {% endfor %}
                 </div>
 
                 <div class="campo-formulario">
                     {{ form.cantidad.label() }}
-                    {{ form.cantidad.data }}
+                    {{ form.cantidad() }}
                 </div>       
                 
                 {{ form.submit() }}
